@@ -12,16 +12,6 @@ import pokemonList from "./data.json";
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <ScrollView style={styles.ScrollView}>
-        {pokemonList.map((pokemon) => {
-          return (
-            <View style={styles.card} key={pokemon.id}>
-              <Text style={styles.cardText}>{pokemon.type}</Text>
-              <Text style={styles.cardText}>{pokemon.name}</Text>
-            </View>
-          );
-        })}
-      </ScrollView> */}
       <View style={styles.ScrollView}>
         <FlatList
           data={pokemonList}
@@ -34,15 +24,18 @@ export default function App() {
             );
           }}
           //itemseperatorcomponent that renders a random emoji between each component
-          ItemSeparatorComponent={() => { 
+          ItemSeparatorComponent={() => {
             return (
-              <Text style={{ fontSize: 30}}>
+              <Text style={{ fontSize: 30 }}>
                 {["🌈", "🌸", "🌼", "🌻", "🌺", "🌹", "🌷"][
                   Math.floor(Math.random() * 7)
                 ]}
               </Text>
             );
           }}
+          keyExtractor={(item) => item.id}
+          ListHeaderComponent={<Text style={styles.headerText}>Pokemon List</Text>}
+          ListFooterComponent={<Text style={styles.headerText}>End of List</Text>}
         />
       </View>
     </SafeAreaView>
@@ -67,5 +60,11 @@ const styles = StyleSheet.create({
   },
   cardText: {
     fontSize: 30,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 12,
   },
 });
