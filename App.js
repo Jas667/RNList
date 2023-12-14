@@ -27,13 +27,22 @@ export default function App() {
           data={pokemonList}
           renderItem={({ item }) => {
             return (
-              <View style={styles.card} key={item.id}>
+              <View style={styles.card}>
                 <Text style={styles.cardText}>{item.type}</Text>
                 <Text style={styles.cardText}>{item.name}</Text>
               </View>
             );
           }}
-          keyExtractor={(item) => item.id}
+          //itemseperatorcomponent that renders a random emoji between each component
+          ItemSeparatorComponent={() => { 
+            return (
+              <Text style={{ fontSize: 30}}>
+                {["🌈", "🌸", "🌼", "🌻", "🌺", "🌹", "🌷"][
+                  Math.floor(Math.random() * 7)
+                ]}
+              </Text>
+            );
+          }}
         />
       </View>
     </SafeAreaView>
@@ -54,7 +63,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
-    marginBottom: 16,
+    // marginBottom: 16,
   },
   cardText: {
     fontSize: 30,
